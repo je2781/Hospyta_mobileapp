@@ -7,7 +7,7 @@ import {
 import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { StyleSheet, Text, View, useWindowDimensions } from "react-native";
+import { StyleSheet, Text, View, useWindowDimensions, SafeAreaView } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import Swiper from "react-native-swiper";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -166,9 +166,9 @@ function Root() {
   }
 
   return (
-    <View style={styles.rootContainer} onLayout={onLayoutRootView}>
+    <SafeAreaView style={styles.rootContainer} onLayout={onLayoutRootView}>
       <Navigation context={authCtx} />
-    </View>
+    </SafeAreaView>
   );
 }
 
