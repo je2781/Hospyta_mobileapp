@@ -7,7 +7,7 @@ import {
 import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { StyleSheet, Text, View, useWindowDimensions, SafeAreaView } from "react-native";
+import { StyleSheet, Text, View, SafeAreaView } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import Swiper from "react-native-swiper";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -27,7 +27,6 @@ const Drawer = createDrawerNavigator();
 
 const MySwiper = () => {
   const authCtx = useContext(AuthContext);
-  const {height} = useWindowDimensions();
 
   if (
     authCtx.switchedToAuthStack.login ||
@@ -41,8 +40,7 @@ const MySwiper = () => {
       dotStyle={styles.dot}
       activeDotStyle={styles.activeDot}
       paginationStyle={styles.pagination}
-      autoplay={true}
-      or
+      
     >
       <OnboardingScreen
         position={1}
