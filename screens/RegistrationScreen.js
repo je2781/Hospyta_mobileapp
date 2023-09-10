@@ -4,6 +4,7 @@ import {
   Text,
   Alert,
   ScrollView,
+  KeyboardAvoidingView,
   useWindowDimensions,
 } from "react-native";
 import { useState } from "react";
@@ -50,15 +51,17 @@ export default function RegistrationScreen({ registerCtx }) {
           onPress={onPress}
         />
       </View>
-      <View style={{flex: 1}}>
+      <View style={{ flex: 1 }}>
         <Text style={styles.title}>{Strings.HRegisterTitle}</Text>
         <Text style={styles.subTitle}>{Strings.HAuthSubtitle}</Text>
-        <View style={{flex: 1}}>
+        <View style={{ flex: 1 }}>
           <ScrollView>
-            <AuthContent
-              onAuthenticate={handleRegistration}
-              isAuthenticating={isAuthenticating}
-            />
+            <KeyboardAvoidingView behavior="position">
+              <AuthContent
+                onAuthenticate={handleRegistration}
+                isAuthenticating={isAuthenticating}
+              />
+            </KeyboardAvoidingView>
           </ScrollView>
         </View>
       </View>

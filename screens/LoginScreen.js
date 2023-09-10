@@ -4,6 +4,7 @@ import {
   Text,
   ScrollView,
   Alert,
+  KeyboardAvoidingView,
   useWindowDimensions,
 } from "react-native";
 import { useState } from "react";
@@ -15,7 +16,7 @@ import AuthContent from "../components/auth/AuthContent";
 
 export default function LoginScreen({ loginCtx }) {
   const [isAuthenticating, setIsAuthenticating] = useState(false);
-  
+
   const { height } = useWindowDimensions();
 
   async function handleLogin({ email, password }) {
@@ -51,16 +52,18 @@ export default function LoginScreen({ loginCtx }) {
           onPress={onPress}
         />
       </View>
-      <View style={{flex: 1}}>
+      <View style={{ flex: 1 }}>
         <Text style={styles.title}>{Strings.HLoginTitle}</Text>
         <Text style={styles.subTitle}>{Strings.HAuthSubtitle}</Text>
-        <View style={{flex: 1}}>
+        <View style={{ flex: 1 }}>
           <ScrollView>
-            <AuthContent
-              isLogin={true}
-              onAuthenticate={handleLogin}
-              isAuthenticating={isAuthenticating}
-            />
+            <KeyboardAvoidingView behavior="position">
+              <AuthContent
+                isLogin={true}
+                onAuthenticate={handleLogin}
+                isAuthenticating={isAuthenticating}
+              />
+            </KeyboardAvoidingView>
           </ScrollView>
         </View>
       </View>

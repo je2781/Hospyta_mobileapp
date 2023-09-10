@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   secondaryContent: {
     fontFamily: "gothamPro-w400",
     fontSize: 16,
-    color: Colors.red500,
+    color: Colors.error500,
   },
   buttonsContainerInLandscape: {
     justifyContent: "space-between",

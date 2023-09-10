@@ -6,101 +6,16 @@ import {
 } from "react";
 import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { StyleSheet, Text, View, SafeAreaView } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
-import Swiper from "react-native-swiper";
+import { StyleSheet, SafeAreaView } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { createDrawerNavigator } from "@react-navigation/drawer";
 import * as SplashScreen from "expo-splash-screen";
 import * as Font from "expo-font";
-import OnboardingScreen from "./screens/Onboarding";
-import Strings from "./contants/Strings";
-import Colors from "./contants/Colors";
+import MySwiper from "./components/swiper/Swiper";
 import AuthContextProvider, { AuthContext } from "./store/auth-context";
-import RegistrationScreen from "./screens/RegistrationScreen";
-import LoginScreen from "./screens/LoginScreen";
-import DrawerNavigator from "./components/drawer/Drawer";
-
-const Stack = createNativeStackNavigator();
-const Drawer = createDrawerNavigator();
-
-const MySwiper = () => {
-  const authCtx = useContext(AuthContext);
-
-  if (
-    authCtx.switchedToAuthStack.login ||
-    authCtx.switchedToAuthStack.registration
-  ) {
-    return <AuthStack />;
-  }
-
-  return (
-    <Swiper
-      dotStyle={styles.dot}
-      activeDotStyle={styles.activeDot}
-      paginationStyle={styles.pagination}
-      
-    >
-      <OnboardingScreen
-        position={1}
-        content={Strings.HOnboarding1}
-        handleSignin={authCtx.switchToLogin}
-        handleRegistration={authCtx.switchToRegistration}
-      />
-      <OnboardingScreen
-        position={2}
-        content={Strings.HOnboarding2}
-        handleSignin={authCtx.switchToLogin}
-        handleRegistration={authCtx.switchToRegistration}
-      />
-      <OnboardingScreen
-        position={3}
-        content={Strings.HOnboarding3}
-        handleSignin={authCtx.switchToLogin}
-        handleRegistration={authCtx.switchToRegistration}
-      />
-      <OnboardingScreen
-        position={4}
-        content={Strings.HOnboarding4}
-        handleSignin={authCtx.switchToLogin}
-        handleRegistration={authCtx.switchToRegistration}
-      />
-    </Swiper>
-  );
-};
-
+import AuthenticatedStack
+ from "./components/auth/AuthenticatedStack";
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
-
-function AuthStack() {
-  const authCtx = useContext(AuthContext);
-
-  return (
-    <Stack.Navigator
-      initialRouteName={
-        authCtx.switchedToAuthStack.login ? "SignIn" : "Register"
-      }
-      screenOptions={{
-        headerShown: false,
-        contentStyle: { backgroundColor: Colors.secondary50 },
-      }}
-    >
-      <Stack.Screen name="Register">
-        {(props) => <RegistrationScreen {...props} registerCtx={authCtx} />}
-      </Stack.Screen>
-      <Stack.Screen name="SignIn">
-        {(props) => <LoginScreen {...props} loginCtx={authCtx} />}
-      </Stack.Screen>
-    </Stack.Navigator>
-  );
-}
-
-function AuthenticatedStack() {
-  return (
-    <DrawerNavigator/>
-  );
-}
 
 function Navigation({ context }) {
   return (
@@ -184,23 +99,5 @@ export default function App() {
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
-  },
-  dot: {
-    backgroundColor: "gray",
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    margin: 3,
-  },
-  activeDot: {
-    backgroundColor: "blue",
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    margin: 3,
-  },
-  pagination: {
-    position: "relative",
-    bottom: 20, // Adjust the position as needed
-  },
+  }
 });

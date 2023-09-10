@@ -20,14 +20,20 @@ function Input({
   const [isSecure, setIsSecure] = useState(false);
   return (
     <View style={styles.inputContainer}>
-      <MaterialIcons
-        name={icon}
-        size={19}
-        color={Colors.secondary800}
-        style={styles.icon}
-      />
+      <View
+        style={[styles.prefixIconContainer, isInvalid && styles.inputInvalid]}
+      >
+        <MaterialIcons name={icon} size={19} color={Colors.secondary800} />
+      </View>
       <TextInput
-        style={[styles.input, isInvalid && styles.inputInvalid]}
+        style={[
+          styles.input,
+          isInvalid && styles.inputInvalid,
+          !hasSuffixIcon && {
+            borderTopRightRadius: 16,
+            borderBottomRightRadius: 16,
+          },
+        ]}
         autoCapitalize="none"
         autoCorrect={false}
         keyboardType={keyboardType}
@@ -40,13 +46,16 @@ function Input({
         // onSubmitEditing={submitData}
       />
       {hasSuffixIcon && (
-        <FontAwesome
-          name={suffixIcon}
-          size={19}
-          color={Colors.secondary800}
-          style={styles.icon}
-          onPress={() => setIsSecure(currentValue => !currentValue)}
-        />
+        <View
+          style={[styles.suffixIconContainer, isInvalid && styles.inputInvalid]}
+        >
+          <FontAwesome
+            name={suffixIcon}
+            size={19}
+            color={Colors.secondary800}
+            onPress={() => setIsSecure((currentValue) => !currentValue)}
+          />
+        </View>
       )}
     </View>
   );
@@ -64,18 +73,23 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    paddingVertical: 8,
+    paddingVertical: 11,
     paddingRight: 8,
     paddingLeft: 0,
     backgroundColor: "white",
     fontSize: 16,
-    borderBottomRightRadius: 16,
-    borderTopRightRadius: 16,
   },
   inputInvalid: {
-    backgroundColor: Colors.indigo500,
+    backgroundColor: Colors.error100,
   },
-  icon: {
+  prefixIconContainer: {
     padding: 15,
+    borderTopLeftRadius: 16,
+    borderBottomLeftRadius: 16,
+  },
+  suffixIconContainer: {
+    padding: 15,
+    borderTopRightRadius: 16,
+    borderBottomRightRadius: 16,
   },
 });

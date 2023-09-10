@@ -14,6 +14,7 @@ export default Colors = {
     indigo500: '#643FDB',
     green300: '#7AEC53',
     green500: '#27AE60',
-    red500: '#E32654'
+    error500: '#E32654',
+    error100: '#f9beda',
 
 }
