@@ -36,6 +36,7 @@ export default function OnboardingScreen({
               paddingHorizontal={12}
               paddingVertical={10}
               borderRadius={8}
+              fontWeight='bold'
             >
               Sign In
             </Button>
@@ -50,6 +51,7 @@ export default function OnboardingScreen({
               paddingHorizontal={12}
               paddingVertical={10}
               borderRadius={8}
+              fontWeight='bold'
             >
               Sign Up
             </Button>

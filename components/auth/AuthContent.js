@@ -48,6 +48,7 @@ function AuthContent({ isLogin, onAuthenticate, isAuthenticating }) {
         onSubmit={submitHandler}
         isAuthenticating={isAuthenticating}
         credentialsInvalid={credentialsInvalid}
+        setCredentialsInvalid={setCredentialsInvalid}
       />
       
     </View>

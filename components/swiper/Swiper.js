@@ -1,10 +1,10 @@
 import Swiper from "react-native-swiper";
-import { StyleSheet} from "react-native";
+import { StyleSheet, View} from "react-native";
 import { useContext } from "react";
 import { AuthContext } from "../../store/auth-context";
 import AuthStack from "../auth/AuthStack";
 
-const MySwiper = ({ children, isAuth, activeDotColor, bottom}) => {
+const MySwiper = ({ children, isAuth, activeDotColor, bottom, top}) => {
 
   if (isAuth) {
     const authCtx = useContext(AuthContext);
@@ -18,15 +18,16 @@ const MySwiper = ({ children, isAuth, activeDotColor, bottom}) => {
   }
 
   return (
+
     <Swiper
       dotStyle={styles.dot}
       activeDotStyle={[styles.activeDot, {backgroundColor: activeDotColor}]}
-      paginationStyle={[styles.pagination, {bottom: bottom}]}
+      paginationStyle={[styles.pagination, {bottom: bottom, top: top}]}
     >
       {children}
     </Swiper>
   );
-};
+}
 
 export default MySwiper;
 
@@ -45,6 +46,6 @@ const styles = StyleSheet.create({
     margin: 3,
   },
   pagination: {
-    position: "relative",
+    position: "absolute",
   },
 });

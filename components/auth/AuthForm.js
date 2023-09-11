@@ -9,20 +9,19 @@ import Button from "../ui/Button";
 import FlatButton from "../ui/FlatButton";
 import Strings from "../../contants/Strings";
 
-function AuthForm({ isLogin, onSubmit, credentialsInvalid, isAuthenticating }) {
+function AuthForm({
+  isLogin,
+  onSubmit,
+  credentialsInvalid,
+  isAuthenticating,
+  setCredentialsInvalid,
+}) {
   const [enteredEmail, setEnteredEmail] = useState("");
   const [enteredfirstName, setEnteredfirstName] = useState("");
   const [enteredPassword, setEnteredPassword] = useState("");
   const [enteredlastName, setEnteredlastName] = useState("");
   const [isRead, setIsRead] = useState(false);
   const navigation = useNavigation();
-
-  const {
-    email: emailIsInvalid,
-    firstName: firstNameIsInvalid,
-    password: passwordIsInvalid,
-    lastName: lastNameIsInvalid,
-  } = credentialsInvalid;
 
   function switchAuthModeHandler() {
     // Todo
@@ -38,6 +37,12 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid, isAuthenticating }) {
   }
 
   function updateInputValueHandler(inputType, enteredValue) {
+    setCredentialsInvalid({
+      email: false,
+      firstName: false,
+      password: false,
+      lastName: false,
+    });
     switch (inputType) {
       case "email":
         setEnteredEmail(enteredValue);
@@ -69,7 +74,7 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid, isAuthenticating }) {
         <Input
           onUpdateValue={updateInputValueHandler.bind(this, "firstName")}
           value={enteredfirstName}
-          isInvalid={firstNameIsInvalid}
+          isInvalid={credentialsInvalid.firstName}
           icon="person-outline"
           placeholder="First name"
           placeholderColor={Colors.secondary800}
@@ -79,7 +84,7 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid, isAuthenticating }) {
         <Input
           onUpdateValue={updateInputValueHandler.bind(this, "lastName")}
           value={enteredlastName}
-          isInvalid={lastNameIsInvalid}
+          isInvalid={credentialsInvalid.lastName}
           icon="person-outline"
           placeholder="Last name"
           placeholderColor={Colors.secondary800}
@@ -90,7 +95,7 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid, isAuthenticating }) {
         value={enteredEmail}
         keyboardType="email-address"
         icon="mail-outline"
-        isInvalid={emailIsInvalid}
+        isInvalid={credentialsInvalid.email}
         placeholder="example@gmail.com"
         placeholderColor={Colors.secondary800}
       />
@@ -103,7 +108,7 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid, isAuthenticating }) {
         hasSuffixIcon
         suffixIcon="eye-slash"
         value={enteredPassword}
-        isInvalid={passwordIsInvalid}
+        isInvalid={credentialsInvalid.password}
         placeholder="*********"
         placeholderColor={Colors.secondary800}
       />
@@ -149,7 +154,7 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid, isAuthenticating }) {
       {isLogin && (
         <View style={{ alignItems: "flex-end", marginBottom: 8, marginTop: 4 }}>
           <FlatButton color={Colors.secondary500} fontSize={14}>
-           {Strings.HForgotPassFlatButton}
+            {Strings.HForgotPassFlatButton}
           </FlatButton>
         </View>
       )}
@@ -167,6 +172,7 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid, isAuthenticating }) {
                 paddingHorizontal={12}
                 borderRadius={8}
                 paddingVertical={10}
+                fontWeight='bold'
               >
                 Sign In
               </Button>
@@ -188,13 +194,15 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid, isAuthenticating }) {
               paddingVertical={10}
               borderRadius={8}
               hasLeftExternalIcon
-              externalIcon={<Image
-                source={require("../../assets/images/png/google_icon.png")}
-              />}
+              leftExternalIcon={
+                <Image
+                  source={require("../../assets/images/png/google_icon.png")}
+                />
+              }
               fontSize={16}
               color={Colors.secondary500}
             >
-             {Strings.HLoginGoogle}
+              {Strings.HLoginGoogle}
             </Button>
             <View style={{ marginTop: 62, alignItems: "center" }}>
               <Text>
@@ -226,6 +234,7 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid, isAuthenticating }) {
                 paddingHorizontal={12}
                 paddingVertical={10}
                 borderRadius={8}
+                fontWeight='bold'
               >
                 Register
               </Button>
@@ -234,9 +243,7 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid, isAuthenticating }) {
               <View style={styles.alternateTextTrailing}>
                 <View style={styles.alternateTextTrailingLine}></View>
               </View>
-              <View style={{ marginHorizontal: 24, flex: 2 }}>
-                <Text style={styles.alternateText}>Or Sign up with</Text>
-              </View>
+              <Text style={styles.alternateText}>Or Sign up with</Text>
               <View style={styles.alternateTextTrailing}>
                 <View style={styles.alternateTextTrailingLine}></View>
               </View>
@@ -246,16 +253,18 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid, isAuthenticating }) {
               buttonBackgroundColor="white"
               onPress={submitHandler}
               hasLeftExternalIcon
-              externalIcon={<Image
-                source={require("../../assets/images/png/google_icon.png")}
-              />}
+              leftExternalIcon={
+                <Image
+                  source={require("../../assets/images/png/google_icon.png")}
+                />
+              }
               fontSize={16}
               color={Colors.secondary500}
               paddingHorizontal={12}
               paddingVertical={10}
               borderRadius={8}
             >
-             {Strings.HRegisterGoogle}
+              {Strings.HRegisterGoogle}
             </Button>
             <View style={{ marginTop: 16, alignItems: "center" }}>
               <Text>
@@ -304,6 +313,7 @@ const styles = StyleSheet.create({
     color: Colors.secondary500,
     fontSize: 15,
     fontFamily: "gothamPro-w400",
+    marginHorizontal: 7,
   },
   alternateTextTrailing: {
     justifyContent: "center",

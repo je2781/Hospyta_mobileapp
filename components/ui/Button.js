@@ -10,48 +10,56 @@ function Button({
   hasLeftExternalIcon,
   hasRightExternalIcon,
   borderRadius,
+  fontWeight,
   paddingHorizontal,
   paddingVertical,
-  externalIcon,
+  leftExternalIcon,
+  rightExternalIcon,
   marginLeft,
   marginRight,
 }) {
   return (
-    <View>
-      <Pressable
-        style={({ pressed }) => [
-          styles.button,
-          {
-            backgroundColor: buttonBackgroundColor,
-            borderColor: buttonBackgroundColor,
-            borderRadius: borderRadius,
-            paddingHorizontal: paddingHorizontal,
-            paddingVertical: paddingVertical,
-          },
-          pressed && styles.pressed,
-          isTransparent && styles.buttonTransparent,
+    <Pressable
+      style={({ pressed }) => [
+        styles.button,
+        {
+          backgroundColor: buttonBackgroundColor,
+          borderColor: buttonBackgroundColor,
+          borderRadius: borderRadius,
+          paddingHorizontal: paddingHorizontal,
+          paddingVertical: paddingVertical,
+        },
+        pressed && styles.pressed,
+        isTransparent && styles.buttonTransparent,
+      ]}
+      onPress={onPress}
+    >
+      <View
+        style={[
+          styles.iconContainer,
+          hasLeftExternalIcon && hasRightExternalIcon
+            ? { justifyContent: "space-between" }
+            : { justifyContent: "center" },
         ]}
-        onPress={onPress}
       >
-        <View style={styles.iconContainer}>
-          {hasLeftExternalIcon && externalIcon}
-          <Text
-            style={[
-              styles.buttonText,
-              {
-                marginLeft: marginLeft,
-                color: color,
-                fontSize: fontSize,
-                marginRight: marginRight,
-              },
-            ]}
-          >
-            {children}
-          </Text>
-          {hasRightExternalIcon && externalIcon}
-        </View>
-      </Pressable>
-    </View>
+        {hasLeftExternalIcon && leftExternalIcon}
+        <Text
+          style={[
+            styles.buttonText,
+            {
+              marginLeft: marginLeft,
+              color: color,
+              fontSize: fontSize,
+              marginRight: marginRight,
+              fontWeight: fontWeight,
+            },
+          ]}
+        >
+          {children}
+        </Text>
+        {hasRightExternalIcon && rightExternalIcon}
+      </View>
+    </Pressable>
   );
 }
 
@@ -73,15 +81,14 @@ const styles = StyleSheet.create({
     borderWidth: 2,
   },
   pressed: {
-    opacity: 0.7,
+    opacity: 0.75,
   },
   buttonText: {
     textAlign: "center",
-    fontWeight: "bold",
     fontFamily: "gothamPro-w400",
   },
   iconContainer: {
     flexDirection: "row",
-    justifyContent: "center",
+    alignItems: "center",
   },
 });

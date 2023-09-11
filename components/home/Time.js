@@ -2,12 +2,12 @@ import { View, Text, StyleSheet } from "react-native";
 import { get24Time, getWeekday, getDay } from "../../util/date";
 import Colors from '../../contants/Colors';
 
-export default function Time({date}) {
+export default function Time({date, backgroundColor}) {
   const firstEle = getDay(date);
   const secondEle = getWeekday(date);
   const thirdEle = get24Time(date);
   return (
-    <View style={styles.rootContainer}>
+    <View style={[styles.rootContainer, {backgroundColor: backgroundColor}]}>
       <Text style={styles.firstEle}>{firstEle}</Text>
       <Text style={styles.secondEle}>{secondEle}</Text>
       <Text style={styles.thirdEle}>{thirdEle}</Text>
@@ -18,7 +18,6 @@ export default function Time({date}) {
 const styles = StyleSheet.create({
   rootContainer: {
     paddingHorizontal: 6,
-    backgroundColor: Colors.indigo200,
     borderRadius: 15,
     justifyContent: 'center',
     height: '95%'

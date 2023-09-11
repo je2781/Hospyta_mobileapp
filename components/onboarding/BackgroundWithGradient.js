@@ -38,11 +38,9 @@ export default function BackgroundWithGradient({ children, position }) {
 
   return (
     <LinearGradient
-      start={{ x: 0, y: 1 }}
-      end={{ x: 0, y: 0.3 }}
-      locations={[0, 1]}
+      locations={[0, 0.5, 1]}
       style={styles.rootScreen}
-      colors={[Colors.secondary50, "#000000"]}
+      colors={[Colors.secondary50, "#000000", "#000000"]}
     >
       <ImageBackground
         source={icon}

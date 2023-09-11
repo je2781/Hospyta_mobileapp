@@ -29,7 +29,7 @@ function Navigation({ context }) {
       {context.isAuthenticated ? (
         <AuthenticatedStack />
       ) : (
-        <MySwiper isAuth activeDotColor={Colors.primary500} bottom={20}>
+        <MySwiper isAuth activeDotColor={Colors.primary500} bottom={10}>
           {data.map((datum, index) => (
             <OnboardingScreen
               key={index}

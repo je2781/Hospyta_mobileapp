@@ -14,5 +14,9 @@ export default Strings = {
     HHomeScreenCalenderTitle: 'Pending appointment',
     HHomeScreenCalenderPatientName: 'Tanvir Ahmed',
     HHomeScreenCalenderDiagnosis1: 'High Blood Pressure',
-    HHomeScreenCalenderDiagnosis2: 'Malaria'
+    HHomeScreenCalenderDiagnosis2: 'Malaria',
+    HHomeScreenAvailabilityText: 'I am Available',
+    HHomeScreenAppointmentText: 'Schedule appointment calender',
+    HHomeScreenCommunityText: 'Community Feed',
+    HHomeScreenCommunityExploreButtonText: 'View All'
 }

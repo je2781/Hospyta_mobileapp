@@ -17,7 +17,7 @@ function Input({
   value,
   isInvalid,
 }) {
-  const [isSecure, setIsSecure] = useState(false);
+  const [isSecure, setIsSecure] = useState(true);
   return (
     <View style={styles.inputContainer}>
       <View
