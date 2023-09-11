@@ -1,9 +1,4 @@
-import {
-  useState,
-  useEffect,
-  useCallback,
-  useContext,
-} from "react";
+import { useState, useEffect, useCallback, useContext } from "react";
 import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { StyleSheet, SafeAreaView } from "react-native";
@@ -12,15 +7,40 @@ import * as SplashScreen from "expo-splash-screen";
 import * as Font from "expo-font";
 import MySwiper from "./components/swiper/Swiper";
 import AuthContextProvider, { AuthContext } from "./store/auth-context";
-import AuthenticatedStack
- from "./components/auth/AuthenticatedStack";
+import AuthenticatedStack from "./components/auth/AuthenticatedStack";
+import OnboardingScreen from "./screens/auth/Onboarding";
+import Colors from "./contants/Colors";
+
+import Strings from "./contants/Strings";
+
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
 
 function Navigation({ context }) {
+  const data = [
+    Strings.HOnboarding1,
+    Strings.HOnboarding2,
+    Strings.HOnboarding3,
+    Strings.HOnboarding4,
+  ];
+  
   return (
     <NavigationContainer>
-      {context.isAuthenticated ? <AuthenticatedStack /> : <MySwiper />}
+      {context.isAuthenticated ? (
+        <AuthenticatedStack />
+      ) : (
+        <MySwiper isAuth activeDotColor={Colors.primary500} bottom={20}>
+          {data.map((datum, index) => (
+            <OnboardingScreen
+              key={index}
+              content={datum}
+              position={index + 1}
+              handleSignin={context.switchToLogin}
+              handleRegistration={switchToRegistration}
+            />
+          ))}
+        </MySwiper>
+      )}
     </NavigationContainer>
   );
 }
@@ -52,6 +72,10 @@ function Root() {
         await Font.loadAsync(
           "poppins-w500",
           require("./assets/font_3/Poppins-SemiBold.ttf")
+        );
+        await Font.loadAsync(
+          "poppins-w600",
+          require("./assets/font_3/Poppins-Bold.ttf")
         );
         await Font.loadAsync(
           "poppins-w400",
@@ -99,5 +123,5 @@ export default function App() {
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
-  }
+  },
 });

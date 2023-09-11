@@ -7,8 +7,14 @@ function Button({
   fontSize,
   isTransparent,
   buttonBackgroundColor,
-  hasExternalIcon,
+  hasLeftExternalIcon,
+  hasRightExternalIcon,
+  borderRadius,
+  paddingHorizontal,
+  paddingVertical,
+  externalIcon,
   marginLeft,
+  marginRight,
 }) {
   return (
     <View>
@@ -18,6 +24,9 @@ function Button({
           {
             backgroundColor: buttonBackgroundColor,
             borderColor: buttonBackgroundColor,
+            borderRadius: borderRadius,
+            paddingHorizontal: paddingHorizontal,
+            paddingVertical: paddingVertical,
           },
           pressed && styles.pressed,
           isTransparent && styles.buttonTransparent,
@@ -25,14 +34,21 @@ function Button({
         onPress={onPress}
       >
         <View style={styles.iconContainer}>
-          {hasExternalIcon && (
-            <Image
-              source={require("../../assets/images/png/google_icon.png")}
-            />
-          )}
-          <Text style={[styles.buttonText, { marginLeft: marginLeft, color: color, fontSize: fontSize }]}>
+          {hasLeftExternalIcon && externalIcon}
+          <Text
+            style={[
+              styles.buttonText,
+              {
+                marginLeft: marginLeft,
+                color: color,
+                fontSize: fontSize,
+                marginRight: marginRight,
+              },
+            ]}
+          >
             {children}
           </Text>
+          {hasRightExternalIcon && externalIcon}
         </View>
       </Pressable>
     </View>
@@ -43,9 +59,6 @@ export default Button;
 
 const styles = StyleSheet.create({
   button: {
-    borderRadius: 8,
-    paddingVertical: 10,
-    paddingHorizontal: 12,
     // elevation: 2,
     marginVertical: 8,
     borderWidth: 2,
@@ -69,6 +82,6 @@ const styles = StyleSheet.create({
   },
   iconContainer: {
     flexDirection: "row",
-    justifyContent: 'center'
+    justifyContent: "center",
   },
 });

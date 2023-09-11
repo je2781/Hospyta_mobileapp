@@ -5,9 +5,9 @@ import {
   Text,
   useWindowDimensions,
 } from "react-native";
-import Colors from "../contants/Colors";
-import Button from "../components/ui/Button";
-import BackgroundWithGradient from "../components/onboarding/BackgroundWithGradient";
+import Colors from "../../contants/Colors";
+import Button from "../../components/ui/Button";
+import BackgroundWithGradient from "../../components/onboarding/BackgroundWithGradient";
 
 export default function OnboardingScreen({
   content,
@@ -33,6 +33,9 @@ export default function OnboardingScreen({
               onPress={handleSignin}
               color="white"
               fontSize={14}
+              paddingHorizontal={12}
+              paddingVertical={10}
+              borderRadius={8}
             >
               Sign In
             </Button>
@@ -44,6 +47,9 @@ export default function OnboardingScreen({
               onPress={handleRegistration}
               color="white"
               fontSize={14}
+              paddingHorizontal={12}
+              paddingVertical={10}
+              borderRadius={8}
             >
               Sign Up
             </Button>

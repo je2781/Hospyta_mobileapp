@@ -6,9 +6,13 @@ export default Strings = {
     HRegisterTitle: 'Register Account',
     HLoginTitle: 'Hello Dr!',
     HAuthSubtitle: 'Fill your details or continue with social media',
-    HLoginGoogle: 'Sign In wiith Google',
+    HLoginGoogle: 'Sign In with Google',
     HRegisterGoogle: 'Sign Up wiith Google',
-    HForgotPassFlatButton: 'Forgot passowrd?',
+    HForgotPassFlatButton: 'Forgot password?',
     HHomeScreenTitle: 'Welcome Dr,',
-    HHomeScreenSubtitle: 'What do you want to do today?'
+    HHomeScreenSubtitle: 'What do you want to do today?',
+    HHomeScreenCalenderTitle: 'Pending appointment',
+    HHomeScreenCalenderPatientName: 'Tanvir Ahmed',
+    HHomeScreenCalenderDiagnosis1: 'High Blood Pressure',
+    HHomeScreenCalenderDiagnosis2: 'Malaria'
 }

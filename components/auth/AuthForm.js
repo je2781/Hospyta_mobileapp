@@ -7,6 +7,7 @@ import Colors from "../../contants/Colors";
 import IconButton from "../ui/IconButton";
 import Button from "../ui/Button";
 import FlatButton from "../ui/FlatButton";
+import Strings from "../../contants/Strings";
 
 function AuthForm({ isLogin, onSubmit, credentialsInvalid, isAuthenticating }) {
   const [enteredEmail, setEnteredEmail] = useState("");
@@ -148,7 +149,7 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid, isAuthenticating }) {
       {isLogin && (
         <View style={{ alignItems: "flex-end", marginBottom: 8, marginTop: 4 }}>
           <FlatButton color={Colors.secondary500} fontSize={14}>
-            Forgot password?
+           {Strings.HForgotPassFlatButton}
           </FlatButton>
         </View>
       )}
@@ -163,6 +164,9 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid, isAuthenticating }) {
                 onPress={submitHandler}
                 color="white"
                 fontSize={14}
+                paddingHorizontal={12}
+                borderRadius={8}
+                paddingVertical={10}
               >
                 Sign In
               </Button>
@@ -180,11 +184,17 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid, isAuthenticating }) {
               marginLeft={16}
               buttonBackgroundColor="white"
               onPress={submitHandler}
-              hasExternalIcon
+              paddingHorizontal={12}
+              paddingVertical={10}
+              borderRadius={8}
+              hasLeftExternalIcon
+              externalIcon={<Image
+                source={require("../../assets/images/png/google_icon.png")}
+              />}
               fontSize={16}
               color={Colors.secondary500}
             >
-              Sign In with Google
+             {Strings.HLoginGoogle}
             </Button>
             <View style={{ marginTop: 62, alignItems: "center" }}>
               <Text>
@@ -213,6 +223,9 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid, isAuthenticating }) {
                 onPress={submitHandler}
                 color="white"
                 fontSize={14}
+                paddingHorizontal={12}
+                paddingVertical={10}
+                borderRadius={8}
               >
                 Register
               </Button>
@@ -232,11 +245,17 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid, isAuthenticating }) {
               marginLeft={16}
               buttonBackgroundColor="white"
               onPress={submitHandler}
-              hasExternalIcon
+              hasLeftExternalIcon
+              externalIcon={<Image
+                source={require("../../assets/images/png/google_icon.png")}
+              />}
               fontSize={16}
               color={Colors.secondary500}
+              paddingHorizontal={12}
+              paddingVertical={10}
+              borderRadius={8}
             >
-              Sign Up with Google
+             {Strings.HRegisterGoogle}
             </Button>
             <View style={{ marginTop: 16, alignItems: "center" }}>
               <Text>

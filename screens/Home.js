@@ -1,5 +1,6 @@
 import { View, StyleSheet } from "react-native";
 import TitleBar from "../components/home/TitleBar";
+import ScheduleCarousel from "../components/home/ScheduleCarousel";
 import Strings from "../contants/Strings";
 
 export default function HomeScreen() {
@@ -9,6 +10,7 @@ export default function HomeScreen() {
         title={Strings.HHomeScreenTitle}
         subTitle={Strings.HHomeScreenSubtitle}
       />
+      <ScheduleCarousel style={styles.carousel}/>
     </View>
   );
 }
@@ -16,6 +18,9 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
-    padding: 24,
+    padding: 16,
   },
+  carousel:{
+    marginTop: 8
+  }
 });

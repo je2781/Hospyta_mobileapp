@@ -2,27 +2,28 @@ import {
   View,
   StyleSheet,
   Text,
-  Alert,
   ScrollView,
+  Alert,
   KeyboardAvoidingView,
   useWindowDimensions,
 } from "react-native";
 import { useState } from "react";
-import IconButton from "../components/ui/IconButton";
-import Colors from "../contants/Colors";
-import Strings from "../contants/Strings";
-import AuthContent from "../components/auth/AuthContent";
-import { createUser } from "../util/auth";
+import { verifyUser } from "../../util/auth";
+import IconButton from "../../components/ui/IconButton";
+import Colors from "../../contants/Colors";
+import Strings from "../../contants/Strings";
+import AuthContent from "../../components/auth/AuthContent";
 
-export default function RegistrationScreen({ registerCtx }) {
+export default function LoginScreen({ loginCtx }) {
   const [isAuthenticating, setIsAuthenticating] = useState(false);
+
   const { height } = useWindowDimensions();
 
-  async function handleRegistration({ email, password }) {
+  async function handleLogin({ email, password }) {
     setIsAuthenticating(true);
     try {
-      const token = await createUser(email, password);
-      registerCtx.authenticate(token);
+      const token = await verifyUser(email, password);
+      loginCtx.authenticate(token);
     } catch (err) {
       Alert.alert(
         "Authentication failed!",
@@ -33,7 +34,7 @@ export default function RegistrationScreen({ registerCtx }) {
   }
 
   function onPress() {
-    registerCtx.goBackToOnboarding();
+    loginCtx.goBackToOnboarding();
   }
 
   return (
@@ -52,13 +53,14 @@ export default function RegistrationScreen({ registerCtx }) {
         />
       </View>
       <View style={{ flex: 1 }}>
-        <Text style={styles.title}>{Strings.HRegisterTitle}</Text>
+        <Text style={styles.title}>{Strings.HLoginTitle}</Text>
         <Text style={styles.subTitle}>{Strings.HAuthSubtitle}</Text>
         <View style={{ flex: 1 }}>
           <ScrollView>
             <KeyboardAvoidingView behavior="position">
               <AuthContent
-                onAuthenticate={handleRegistration}
+                isLogin={true}
+                onAuthenticate={handleLogin}
                 isAuthenticating={isAuthenticating}
               />
             </KeyboardAvoidingView>
@@ -82,7 +84,7 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 8,
-    marginVertical: 28,
+    marginTop: 28,
   },
   title: {
     fontFamily: "axiforma-w600",
@@ -95,8 +97,8 @@ const styles = StyleSheet.create({
     fontFamily: "gothamPro-w400",
     color: Colors.secondary400,
     fontSize: 16,
-    paddingHorizontal: 6,
     marginBottom: 8,
+    paddingHorizontal: 6,
     marginTop: 12,
     textAlign: "center",
     lineHeight: 24,

@@ -1,4 +1,10 @@
-import { StyleSheet, ImageBackground, View, Image, useWindowDimensions} from "react-native";
+import {
+  StyleSheet,
+  ImageBackground,
+  View,
+  Image,
+  useWindowDimensions,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Colors from "../../contants/Colors";
 
@@ -20,20 +26,23 @@ export default function BackgroundWithGradient({ children, position }) {
       break;
   }
 
-  const {height} = useWindowDimensions();
+  const { height } = useWindowDimensions();
 
   let paddingTop = 6;
   let top = null;
 
-  if(height < 400){
+  if (height < 400) {
     paddingTop = 0;
     top = -30;
   }
 
   return (
     <LinearGradient
+      start={{ x: 0, y: 1 }}
+      end={{ x: 0, y: 0.3 }}
+      locations={[0, 1]}
       style={styles.rootScreen}
-      colors={[Colors.secondary50, '#000000', '#000000']}
+      colors={[Colors.secondary50, "#000000"]}
     >
       <ImageBackground
         source={icon}
@@ -41,7 +50,7 @@ export default function BackgroundWithGradient({ children, position }) {
         style={styles.rootScreen}
         imageStyle={styles.backgroundImg}
       >
-        <View style={[styles.secondaryContainer, {paddingTop: paddingTop}]}>
+        <View style={[styles.secondaryContainer, { paddingTop: paddingTop }]}>
           <Image
             source={
               position === 4
@@ -49,7 +58,7 @@ export default function BackgroundWithGradient({ children, position }) {
                 : require("../../assets/images/png/logo.png")
             }
             resizeMode="contain"
-            style={[styles.foregroundImg, {top: top}]}
+            style={[styles.foregroundImg, { top: top }]}
           />
           {children}
         </View>
@@ -66,7 +75,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 24,
     paddingBottom: 28,
-    justifyContent: 'space-between'
+    justifyContent: "space-between",
   },
   foregroundImg: {
     width: 180,
