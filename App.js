@@ -36,7 +36,7 @@ function Navigation({ context }) {
               content={datum}
               position={index + 1}
               handleSignin={context.switchToLogin}
-              handleRegistration={switchToRegistration}
+              handleRegistration={context.switchToRegistration}
             />
           ))}
         </MySwiper>
