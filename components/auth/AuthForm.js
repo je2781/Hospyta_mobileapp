@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, View, Text, ActivityIndicator } from "react-native";
+import { StyleSheet, View, Text, ActivityIndicator, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import Input from "../ui/Input";
