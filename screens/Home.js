@@ -21,7 +21,7 @@ export default function HomeScreen() {
       />
       <View style={{ flex: 1 }}>
         <ScrollView>
-          <View style={{ height: height < 380 ? height * 0.57 : height * 0.29 }}>
+          <View style={{ height: height < 380 ? height * 0.57 : height * 0.26}}>
             <ScheduleCarousel style={styles.carousel} />
           </View>
           <Availability />

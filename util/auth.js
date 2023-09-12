@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_KEY = 'AIzaSyDIFManKW56bWyYBrWomei84s-DZooKRXQ';
+const API_KEY = process.env.EXPO_PUBLIC_API_KEY;
 
 const BASE_URL = 'https://identitytoolkit.googleapis.com/v1/accounts:';
 
