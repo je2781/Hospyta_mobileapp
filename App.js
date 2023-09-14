@@ -52,10 +52,7 @@ function Root() {
   useEffect(() => {
     async function prepare() {
       try {
-        const storedToken = await AsyncStorage.getItem("token");
-        if (storedToken) {
-          authCtx.authenticate(storedToken);
-        }
+      
         // Pre-load fonts
         await Font.loadAsync(
           "axiforma",
@@ -81,6 +78,12 @@ function Root() {
           "poppins-w400",
           require("./assets/font_3/Poppins-Regular.ttf")
         );
+
+        //retrieving token, and using it for automatic login
+        const storedToken = await AsyncStorage.getItem("token");
+        if (storedToken) {
+          authCtx.authenticate(storedToken);
+        }
       } catch (e) {
         console.warn(e);
       } finally {

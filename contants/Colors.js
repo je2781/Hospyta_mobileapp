@@ -2,6 +2,7 @@ export default Colors = {
     primary500: '#4425F5',
     primary400: '#3E64FF',
     primary200: '#6798E1',
+    primary100: '#8696BB',
     primary50: '#B2DDFF',
     secondary50: '#F6F8FA',
     secondary100: '#FEFEFE',

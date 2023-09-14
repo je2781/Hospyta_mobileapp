@@ -1,66 +1,102 @@
-import { Text, View, FlatList, StyleSheet, Image, useWindowDimensions } from "react-native";
-import FlatButton from "../ui/FlatButton";
+import {
+  Text,
+  View,
+  FlatList,
+  StyleSheet,
+  Image,
+  useWindowDimensions,
+  ScrollView,
+} from "react-native";
 import Strings from "../../contants/Strings";
 import Colors from "../../contants/Colors";
 import { useState } from "react";
+import Header from "../Header";
+
+import Button from "../ui/Button";
+import { imageData, CommunityItemData } from "../../dummy-data";
+import IconButton from "../ui/IconButton";
+
+function CommunityItemTemplate({ icon, text }) {
+  return (
+    <Button
+      paddingVertical={12}
+      borderRadius={12}
+      paddingHorizontal={12}
+      buttonBackgroundColor="#4425f521"
+      color={Colors.primary500}
+      hasLeftExternalIcon
+      leftExternalIcon={icon}
+      fontSize={14}
+      marginLeft={8}
+    >
+      {text}
+    </Button>
+  );
+}
 
 
 export default function CommunityFeed({ style }) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const {width} = useWindowDimensions();
 
-  const slides = [
-    {
-      imageSource: require("../../assets/images/png/feed_placeholderImage.png"),
-    },
-    {
-      imageSource: require("../../assets/images/png/feed_placeholderImage.png"),
-    },
-  ];
-
-  function renderSlide({ item }) {
+  function renderImage({ item }) {
     return <Image source={item.imageSource} style={{ marginRight: 24 }} />;
   }
 
-  const updateIndex = (e) => {
-    const contentOffset = e.nativeEvent.contentOffset.x;
-    const newIndex = Math.round(contentOffset / width);
-    setCurrentIndex(newIndex);
-  };
+  function RenderIcon({
+    position,
+    iconName,
+    icon
+  }) {
+    if (
+      (currentIndex === 0 && position === 0) ||
+      (currentIndex === 1 && position === 1) ||
+      (currentIndex === 2 && position === 2) ||
+      (currentIndex === 3 && position === 3) ||
+      (currentIndex === 4 && position === 4)
+    ) {
+      return <CommunityItemTemplate icon={icon} text={iconName} />;
+    }
+    return (
+      <View style={{ justifyContent: "center" }}>
+        <IconButton
+          externalIcon={icon}
+          hasExternalIcon
+          size={24}
+          onPress={() => setCurrentIndex(position)}
+        />
+      </View>
+    );
+  }
 
   return (
-    <View style={style}>
-      <View style={styles.headerContainer}>
-        <Text style={styles.title}>{Strings.HHomeScreenCommunityText}</Text>
-        <FlatButton color={Colors.primary200} fontSize={14}>
-          {Strings.HHomeScreenCommunityExploreButtonText}
-        </FlatButton>
+    <View style={styles.rootContainer}>
+      <Header
+        title={Strings.HHomeScreenCommunityText}
+        exploreButtonText={Strings.HHomeScreenCommunityExploreButtonText}
+      />
+      <FlatList
+        data={imageData}
+        horizontal
+        renderItem={renderImage}
+        keyExtractor={(item, index) => index}
+      />
+      <View style={styles.IconListContainer}>
+        {CommunityItemData.map((item) => (
+          <RenderIcon
+            key={item.position}
+            position={item.position}
+            icon={item.icon}
+            iconName={item.iconName}
+          />
+        ))}
       </View>
-        <FlatList
-          data={slides}
-          horizontal
-          contentContainerStyle={{justifyContent: 'stretch' }}
-          style={{width: "100%" }} 
-          showsHorizontalScrollIndicator
-          pagingEnabled
-          onMomentumScrollEnd={updateIndex}
-          renderItem={renderSlide}
-          keyExtractor={(item, index) => index}
-        />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  headerContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 18,
-  },
-  title: {
-    fontFamily: "axiforma-w600",
-    fontSize: 16,
-    lineHeight: 24,
-  },
+  IconListContainer: { flexDirection: "row", justifyContent: "space-between", marginTop: 12},
+  rootContainer: {
+    marginTop: 32
+  }
 });
