@@ -10,6 +10,7 @@ import Availability from "../components/home/Availability";
 import Strings from "../contants/Strings";
 import ScheduleAppointment from "../components/home/ScheduleAppoitment";
 import CommunityFeed from "../components/home/CommunityFeed";
+import ShopForDevices from "../components/home/ShopForDevices";
 
 export default function HomeScreen() {
   const { height } = useWindowDimensions();
@@ -27,6 +28,7 @@ export default function HomeScreen() {
           <Availability />
           <ScheduleAppointment style={styles.scheduleAppointment}/>
           <CommunityFeed style={styles.feed}/>
+          <ShopForDevices styles={styles.shop}/>
         </ScrollView>
       </View>
     </View>
@@ -46,6 +48,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 12
   },
   feed: {
+    marginVertical: 28
+  },
+  shop: {
     marginTop: 28
   }
 });

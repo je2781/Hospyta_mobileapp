@@ -18,5 +18,7 @@ export default Strings = {
     HHomeScreenAvailabilityText: 'I am Available',
     HHomeScreenAppointmentText: 'Schedule appointment calender',
     HHomeScreenCommunityText: 'Community Feed',
-    HHomeScreenCommunityExploreButtonText: 'View All'
+    HHomeScreenExploreButtonText: 'View All',
+    HHomeScreenShopDevicesText: 'Shop For Devices',
+
 }

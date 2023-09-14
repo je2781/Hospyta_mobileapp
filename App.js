@@ -78,6 +78,10 @@ function Root() {
           "poppins-w400",
           require("./assets/font_3/Poppins-Regular.ttf")
         );
+        await Font.loadAsync(
+          "gothamPro-w700",
+          require("./assets/font_2/GothamPro-Black.ttf")
+        );
 
         //retrieving token, and using it for automatic login
         const storedToken = await AsyncStorage.getItem("token");
