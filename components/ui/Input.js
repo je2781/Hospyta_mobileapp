@@ -23,6 +23,7 @@ const Input = forwardRef((props, ref) => {
         ]}
         autoCapitalize="none"
         autoCorrect={false}
+        ref={ref}
         keyboardType={props.keyboardType}
         secureTextEntry={isSecure ? props.secure : null}
         onChangeText={props.onUpdateValue}
