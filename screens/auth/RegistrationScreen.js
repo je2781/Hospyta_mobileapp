@@ -56,7 +56,7 @@ export default function RegistrationScreen({ registerCtx }) {
         <Text style={styles.subTitle}>{Strings.HAuthSubtitle}</Text>
         <View style={{ flex: 1 }}>
           <ScrollView>
-            <KeyboardAvoidingView behavior="position">
+            <KeyboardAvoidingView behavior="padding">
               <AuthContent
                 onAuthenticate={handleRegistration}
                 isAuthenticating={isAuthenticating}

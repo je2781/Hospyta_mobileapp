@@ -26,14 +26,15 @@ const Input = forwardRef((props, ref) => {
         ref={ref}
         keyboardType={props.keyboardType}
         secureTextEntry={isSecure ? props.secure : null}
+        blurOnSubmit={props.blurOnSubmit}
         onChangeText={props.onUpdateValue}
-        returnKeyType={props.returnType}
+        returnKeyType={props.returnKeyType}
         value={props.value}
         placeholder={props.placeholder}
         placeholderTextColor={props.placeholderColor}
         onSubmitEditing={props.onSubmitEditing}
       />
-      {hasSuffixIcon && (
+      {props.hasSuffixIcon && (
         <View
           style={[styles.suffixIconContainer, props.isInvalid && styles.inputInvalid]}
         >

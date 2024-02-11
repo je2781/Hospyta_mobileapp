@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { StyleSheet, View, Text, ActivityIndicator, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -22,7 +22,6 @@ function AuthForm({
   const [enteredlastName, setEnteredlastName] = useState("");
   const [isRead, setIsRead] = useState(false);
   const navigation = useNavigation();
-  const fNameRef = useRef(null);
   const lNameRef = useRef(null);
   const emailRef = useRef(null);
   const passRef = useRef(null);
@@ -79,7 +78,8 @@ function AuthForm({
           onUpdateValue={updateInputValueHandler.bind(this, "firstName")}
           value={enteredfirstName}
           isInvalid={credentialsInvalid.firstName}
-          onSubmitEditing={() => fNameRef.current?.focus()}
+          onSubmitEditing={() => lNameRef.current?.focus()}
+          blurOnSubmit={false}
           icon="person-outline"
           returnKeyType={"next"}
           placeholder="First name"
@@ -91,8 +91,10 @@ function AuthForm({
           onUpdateValue={updateInputValueHandler.bind(this, "lastName")}
           value={enteredlastName}
           isInvalid={credentialsInvalid.lastName}
-          onSubmitEditing={() => lNameRef.current?.focus()}
+          blurOnSubmit={false}
+          onSubmitEditing={() => emailRef.current?.focus()}
           icon="person-outline"
+          ref={lNameRef}
           returnKeyType={"next"}
           placeholder="Last name"
           placeholderColor={Colors.secondary800}
@@ -102,24 +104,26 @@ function AuthForm({
         onUpdateValue={updateInputValueHandler.bind(this, "email")}
         value={enteredEmail}
         keyboardType="email-address"
+        ref={emailRef}
+        blurOnSubmit={false}
         icon="mail-outline"
         isInvalid={credentialsInvalid.email}
-        onSubmitEditing={() => emailRef.current?.focus()}
+        onSubmitEditing={() => passRef.current?.focus()}
         placeholder="example@gmail.com"
         returnKeyType={"next"}
         placeholderColor={Colors.secondary800}
       />
 
       <Input
-        label="Password"
         onUpdateValue={updateInputValueHandler.bind(this, "password")}
         secure
         icon="lock-outline"
         hasSuffixIcon
+        ref={passRef}
         suffixIcon="eye-slash"
         value={enteredPassword}
         isInvalid={credentialsInvalid.password}
-        onSubmitEditing={() => passRef.current?.focus()}
+        onSubmitEditing={submitHandler}
         placeholder="*********"
         returnKeyType={"done"}
         placeholderColor={Colors.secondary800}
