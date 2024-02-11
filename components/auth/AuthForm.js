@@ -22,6 +22,10 @@ function AuthForm({
   const [enteredlastName, setEnteredlastName] = useState("");
   const [isRead, setIsRead] = useState(false);
   const navigation = useNavigation();
+  const fNameRef = useRef(null);
+  const lNameRef = useRef(null);
+  const emailRef = useRef(null);
+  const passRef = useRef(null);
 
   function switchAuthModeHandler() {
     // Todo
@@ -75,7 +79,9 @@ function AuthForm({
           onUpdateValue={updateInputValueHandler.bind(this, "firstName")}
           value={enteredfirstName}
           isInvalid={credentialsInvalid.firstName}
+          onSubmitEditing={() => fNameRef.current?.focus()}
           icon="person-outline"
+          returnKeyType={"next"}
           placeholder="First name"
           placeholderColor={Colors.secondary800}
         />
@@ -85,7 +91,9 @@ function AuthForm({
           onUpdateValue={updateInputValueHandler.bind(this, "lastName")}
           value={enteredlastName}
           isInvalid={credentialsInvalid.lastName}
+          onSubmitEditing={() => lNameRef.current?.focus()}
           icon="person-outline"
+          returnKeyType={"next"}
           placeholder="Last name"
           placeholderColor={Colors.secondary800}
         />
@@ -96,7 +104,9 @@ function AuthForm({
         keyboardType="email-address"
         icon="mail-outline"
         isInvalid={credentialsInvalid.email}
+        onSubmitEditing={() => emailRef.current?.focus()}
         placeholder="example@gmail.com"
+        returnKeyType={"next"}
         placeholderColor={Colors.secondary800}
       />
 
@@ -109,7 +119,9 @@ function AuthForm({
         suffixIcon="eye-slash"
         value={enteredPassword}
         isInvalid={credentialsInvalid.password}
+        onSubmitEditing={() => passRef.current?.focus()}
         placeholder="*********"
+        returnKeyType={"done"}
         placeholderColor={Colors.secondary800}
       />
       {!isLogin && (

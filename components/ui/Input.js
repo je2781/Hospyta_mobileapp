@@ -1,56 +1,43 @@
 import { View, Text, TextInput, StyleSheet } from "react-native";
 import { MaterialIcons, FontAwesome } from "@expo/vector-icons";
-import { useState } from "react";
+import { useState, forwardRef } from "react";
 import Colors from "../../contants/Colors";
 
-function Input({
-  keyboardType,
-  returnType,
-  secure,
-  icon,
-  suffixIcon,
-  onUpdateValue,
-  placeholder,
-  hasSuffixIcon,
-  placeholderColor,
-  // submitData,
-  value,
-  isInvalid,
-}) {
+const Input = forwardRef((props, ref) => {
   const [isSecure, setIsSecure] = useState(true);
   return (
     <View style={styles.inputContainer}>
       <View
-        style={[styles.prefixIconContainer, isInvalid && styles.inputInvalid]}
+        style={[styles.prefixIconContainer, props.isInvalid && styles.inputInvalid]}
       >
-        <MaterialIcons name={icon} size={19} color={Colors.secondary800} />
+        <MaterialIcons name={props.icon} size={19} color={Colors.secondary800} />
       </View>
       <TextInput
         style={[
           styles.input,
-          isInvalid && styles.inputInvalid,
-          !hasSuffixIcon && {
+          props.isInvalid && styles.inputInvalid,
+          !props.hasSuffixIcon && {
             borderTopRightRadius: 16,
             borderBottomRightRadius: 16,
           },
         ]}
         autoCapitalize="none"
         autoCorrect={false}
-        keyboardType={keyboardType}
-        secureTextEntry={isSecure ? secure : null}
-        onChangeText={onUpdateValue}
-        value={value}
-        returnKeyType={returnType}
-        placeholder={placeholder}
-        placeholderTextColor={placeholderColor}
-        // onSubmitEditing={submitData}
+        keyboardType={props.keyboardType}
+        secureTextEntry={isSecure ? props.secure : null}
+        onChangeText={props.onUpdateValue}
+        returnKeyType={props.returnType}
+        value={props.value}
+        placeholder={props.placeholder}
+        placeholderTextColor={props.placeholderColor}
+        onSubmitEditing={props.onSubmitEditing}
       />
       {hasSuffixIcon && (
         <View
-          style={[styles.suffixIconContainer, isInvalid && styles.inputInvalid]}
+          style={[styles.suffixIconContainer, props.isInvalid && styles.inputInvalid]}
         >
           <FontAwesome
-            name={suffixIcon}
+            name={props.suffixIcon}
             size={19}
             color={Colors.secondary800}
             onPress={() => setIsSecure((currentValue) => !currentValue)}
@@ -59,7 +46,7 @@ function Input({
       )}
     </View>
   );
-}
+});
 
 export default Input;
 
